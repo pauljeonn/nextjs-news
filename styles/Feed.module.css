@@ -16,6 +16,7 @@
 	width: 500px;
 	max-height: 300px;
 	object-fit: cover;
+	cursor: pointer;
 }
 
 .post h1 {

@@ -6,6 +6,8 @@
 }
 
 .main div {
+	font-size: 18px;
+	font-weight: 300;
 	margin: 25px;
 	cursor: pointer;
 }

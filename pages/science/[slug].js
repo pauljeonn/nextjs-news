@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styles from '../../styles/Feed.module.css';
 import Navbar from '../../components/Navbar';
 
-const Feed = ({ pageNumber, articles }) => {
+const Science = ({ pageNumber, articles }) => {
 	const router = useRouter();
 
 	return (
@@ -33,7 +33,7 @@ const Feed = ({ pageNumber, articles }) => {
 					onClick={() => {
 						if (pageNumber > 1) {
 							router
-								.push(`/feed/${pageNumber - 1}`)
+								.push(`/science/${pageNumber - 1}`)
 								// router.push()는 프로미스이므로 .then을 사용하여 페이지 상단으로 이동한다
 								.then(window.scrollTo(0, 0));
 						}
@@ -47,7 +47,7 @@ const Feed = ({ pageNumber, articles }) => {
 					onClick={() => {
 						if (pageNumber < 5) {
 							router
-								.push(`/feed/${pageNumber + 1}`)
+								.push(`/science/${pageNumber + 1}`)
 								.then(window.scrollTo(0, 0));
 						}
 					}}
@@ -72,10 +72,9 @@ export const getServerSideProps = async (pageContext) => {
 		};
 	}
 
-	// 그렇지 않을 경우, API fetch하기
-	// &pageSize=5&page=${pageNumber}
+	// 스포츠 카테고리만 fetch해오기
 	const apiResponse = await fetch(
-		`https://newsapi.org/v2/top-headlines?country=kr&pageSize=5&page=${pageNumber}&apiKey=${process.env.NEWS_API_KEY}`
+		`https://newsapi.org/v2/top-headlines?country=kr&category=science&pageSize=5&page=${pageNumber}&apiKey=${process.env.NEWS_API_KEY}`
 	);
 
 	const apiJson = await apiResponse.json();
@@ -91,4 +90,4 @@ export const getServerSideProps = async (pageContext) => {
 	};
 };
 
-export default Feed;
+export default Science;
