@@ -7,8 +7,8 @@ const Navbar = () => {
 
 	return (
 		<div className={styles.main}>
-			<div onClick={() => router.push('/')}>Home</div>
-			<div onClick={() => router.push('/feed/1')}>Feed</div>
+			<div onClick={() => router.push('/')}>홈</div>
+			<div onClick={() => router.push('/feed/1')}>뉴스</div>
 		</div>
 	);
 };
