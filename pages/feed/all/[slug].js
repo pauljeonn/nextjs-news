@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Feed.module.css';
-import Navbar from '../../components/Navbar';
+import styles from '../../../styles/Feed.module.css';
+import Navbar from '../../../components/Navbar';
 
-const Tech = ({ pageNumber, articles }) => {
+const Feed = ({ pageNumber, articles }) => {
 	const router = useRouter();
 
 	return (
@@ -16,9 +16,15 @@ const Tech = ({ pageNumber, articles }) => {
 						{/* 타이틀 클릭시 뉴스 링크로 이동 */}
 						<h1 onClick={() => window.open(article.url)}>{article.title}</h1>
 						<p>{article.description}</p>
-						{article.urlToImage && (
+						{/* 해당 기사 이미지가 없으면 백업 이미지로 대체 */}
+						{article.urlToImage ? (
 							<img
 								src={article.urlToImage}
+								onClick={() => window.open(article.url)}
+							/>
+						) : (
+							<img
+								src="/news-img.svg"
 								onClick={() => window.open(article.url)}
 							/>
 						)}
@@ -33,7 +39,7 @@ const Tech = ({ pageNumber, articles }) => {
 					onClick={() => {
 						if (pageNumber > 1) {
 							router
-								.push(`/tech/${pageNumber - 1}`)
+								.push(`/feed/all/${pageNumber - 1}`)
 								// router.push()는 프로미스이므로 .then을 사용하여 페이지 상단으로 이동한다
 								.then(window.scrollTo(0, 0));
 						}
@@ -47,7 +53,7 @@ const Tech = ({ pageNumber, articles }) => {
 					onClick={() => {
 						if (pageNumber < 5) {
 							router
-								.push(`/tech/${pageNumber + 1}`)
+								.push(`/feed/all/${pageNumber + 1}`)
 								.then(window.scrollTo(0, 0));
 						}
 					}}
@@ -59,8 +65,14 @@ const Tech = ({ pageNumber, articles }) => {
 	);
 };
 
-export const getServerSideProps = async (pageContext) => {
-	const pageNumber = pageContext.query.slug;
+export const getServerSideProps = async (context) => {
+	const pageNumber = context.query.slug;
+	// const category = context.query.slug[0];
+	// const pageNumber = context.query.slug[1];
+
+	// if (category === 'all') {
+	// 	category = '';
+	// }
 
 	// 만약 요청한 페이지가 없거나 1보다 작거나 5보다 클 경우
 	if (!pageNumber || pageNumber < 1 || pageNumber > 5) {
@@ -72,9 +84,10 @@ export const getServerSideProps = async (pageContext) => {
 		};
 	}
 
-	// 스포츠 카테고리만 fetch해오기
+	// 그렇지 않을 경우, API fetch하기
+	// &pageSize=5&page=${pageNumber}
 	const apiResponse = await fetch(
-		`https://newsapi.org/v2/top-headlines?country=kr&category=technology&pageSize=5&page=${pageNumber}&apiKey=${process.env.NEWS_API_KEY}`
+		`https://newsapi.org/v2/top-headlines?country=kr&pageSize=5&page=${pageNumber}&apiKey=${process.env.NEWS_API_KEY}`
 	);
 
 	const apiJson = await apiResponse.json();
@@ -90,4 +103,4 @@ export const getServerSideProps = async (pageContext) => {
 	};
 };
 
-export default Tech;
+export default Feed;

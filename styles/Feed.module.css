@@ -17,6 +17,7 @@
 	max-height: 300px;
 	object-fit: cover;
 	cursor: pointer;
+	font-size: 10px;
 }
 
 .post h1 {
