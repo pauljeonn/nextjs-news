@@ -8,10 +8,18 @@
 .main div {
 	font-size: 18px;
 	font-weight: 400;
-	margin: 25px;
+	display: flex;
+	align-items: flex-end;
+	margin: 0 25px;
+	padding: 1px 0;
+	border-bottom: 2px solid transparent;
 	cursor: pointer;
 }
 
 .main div:hover {
 	color: #aaa;
+}
+
+.main img {
+	width: 26px;
 }

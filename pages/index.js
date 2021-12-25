@@ -17,8 +17,8 @@ export default function Home() {
 				<div className={styles.main}>
 					<h1>DAILY NEWS</h1>
 					<img src="/news.svg" />
-					<p>데일리 뉴스에 오신 것을 환영합니다.</p>
-					<p>매일 업데이트되는 최신 뉴스를 편하게 즐겨보세요.</p>
+					<p>데일리 뉴스에 오신 것을 환영합니다!</p>
+					<p>매일 업데이트되는 다양한 채널의 최신 뉴스를 편하게 즐겨보세요.</p>
 				</div>
 			</div>
 		</>
