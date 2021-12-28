@@ -78,7 +78,7 @@ export const getServerSideProps = async (pageContext) => {
 		};
 	}
 
-	// 스포츠 카테고리만 fetch해오기
+	// IT 카테고리만 fetch해오기
 	const apiResponse = await fetch(
 		`https://newsapi.org/v2/top-headlines?country=kr&category=technology&pageSize=5&page=${pageNumber}&apiKey=${process.env.NEWS_API_KEY}`
 	);

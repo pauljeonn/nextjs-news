@@ -67,12 +67,6 @@ const Feed = ({ pageNumber, articles }) => {
 
 export const getServerSideProps = async (context) => {
 	const pageNumber = context.query.slug;
-	// const category = context.query.slug[0];
-	// const pageNumber = context.query.slug[1];
-
-	// if (category === 'all') {
-	// 	category = '';
-	// }
 
 	// 만약 요청한 페이지가 없거나 1보다 작거나 5보다 클 경우
 	if (!pageNumber || pageNumber < 1 || pageNumber > 5) {
